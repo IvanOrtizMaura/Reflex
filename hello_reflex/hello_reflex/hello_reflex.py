@@ -13,7 +13,8 @@ class State(rx.State):
     pass
 
 
-def index() -> rx.Component:
+
+def index():
     return rx.fragment(
         rx.color_mode_button(rx.color_mode_icon(), float="right"),
         rx.vstack(
@@ -38,9 +39,13 @@ def index() -> rx.Component:
             padding_top="10%",
         ),
     )
+    
+def about():
+    return rx.text("About Reflex")
 
 
 # Add state and page to the app.
 app = rx.App()
-app.add_page(index)
+app.add_page(index, "/")
+app.add_page(about, "/about")
 app.compile()
