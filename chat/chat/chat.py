@@ -13,17 +13,12 @@ class State(rx.State):
     pass
 
 
-
-def index():
+def index() -> rx.Component:
     return rx.fragment(
         rx.color_mode_button(rx.color_mode_icon(), float="right"),
         rx.vstack(
             rx.heading("Welcome to Reflex!", font_size="2em"),
             rx.box("Get started by editing ", rx.code(filename, font_size="1em")),
-            rx.box("My name is Iván, I'm a software engineer and I'm from Spain"),
-            rx.circular_progress(
-                rx.circular_progress_label("", color="green"),is_indeterminate=True
-            ),
             rx.link(
                 "Check out our docs!",
                 href=docs_url,
@@ -42,16 +37,9 @@ def index():
             padding_top="10%",
         ),
     )
-    
-def about():
-    return rx.fragment(
-        rx.text("About me"),
-        rx.button("Go to home", onclick="history.back()"),
-    )
 
 
 # Add state and page to the app.
 app = rx.App()
-app.add_page(index, "/")
-app.add_page(about, "/about")
+app.add_page(index)
 app.compile()

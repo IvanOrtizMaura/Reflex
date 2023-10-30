@@ -3,7 +3,9 @@ import { useRouter } from "next/router"
 import { Event, getAllLocalStorageItems, getRefValue, getRefValues, isTrue, preventDefault, refs, spreadArraysOrObjects, uploadFiles, useEventLoop } from "/utils/state"
 import { EventLoopContext, initialEvents, StateContext } from "/utils/context.js"
 import "focus-visible/dist/focus-visible"
-import { Box, Button, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, useColorMode } from "@chakra-ui/react"
+import { Box, Button, Code, Heading, Link, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, useColorMode, VStack } from "@chakra-ui/react"
+import { MoonIcon, SunIcon } from "@chakra-ui/icons"
+import NextLink from "next/link"
 import NextHead from "next/head"
 
 
@@ -62,12 +64,33 @@ export default function Component() {
 )}
 </Fragment>
   <Fragment>
-  <Text>
-  {`About me`}
-</Text>
-  <Button sx={{"onclick": "history.back()"}}>
-  {`Go to home`}
+  <Button onClick={toggleColorMode} sx={{"float": "right"}}>
+  <Fragment>
+  {isTrue((colorMode === "light")) ? (
+  <Fragment>
+  <SunIcon/>
+</Fragment>
+) : (
+  <Fragment>
+  <MoonIcon/>
+</Fragment>
+)}
+</Fragment>
 </Button>
+  <VStack spacing={`1.5em`} sx={{"fontSize": "2em", "paddingTop": "10%"}}>
+  <Heading sx={{"fontSize": "2em"}}>
+  {`Welcome to Reflex!`}
+</Heading>
+  <Box>
+  {`Get started by editing `}
+  <Code sx={{"fontSize": "1em"}}>
+  {`chat/chat.py`}
+</Code>
+</Box>
+  <Link as={NextLink} href={`https://reflex.dev/docs/getting-started/introduction`} sx={{"border": "0.1em solid", "padding": "0.5em", "borderRadius": "0.5em", "_hover": {"color": isTrue((colorMode === "light")) ? `rgb(107,99,246)` : `rgb(179, 175, 255)`}}}>
+  {`Check out our docs!`}
+</Link>
+</VStack>
 </Fragment>
   <NextHead>
   <title>

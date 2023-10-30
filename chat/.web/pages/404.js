@@ -3,7 +3,9 @@ import { useRouter } from "next/router"
 import { Event, getAllLocalStorageItems, getRefValue, getRefValues, isTrue, preventDefault, refs, spreadArraysOrObjects, uploadFiles, useEventLoop } from "/utils/state"
 import { EventLoopContext, initialEvents, StateContext } from "/utils/context.js"
 import "focus-visible/dist/focus-visible"
-import { Box, Button, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, useColorMode } from "@chakra-ui/react"
+import { Box, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, useColorMode } from "@chakra-ui/react"
+import Error from "next/error"
+import { useClientSideRouting } from "/utils/client_side_routing"
 import NextHead from "next/head"
 
 
@@ -33,6 +35,7 @@ export default function Component() {
     }
   }, [router])
 
+  const routeNotFound = useClientSideRouting()
 
   return (
     <Fragment>
@@ -62,18 +65,21 @@ export default function Component() {
 )}
 </Fragment>
   <Fragment>
-  <Text>
-  {`About me`}
-</Text>
-  <Button sx={{"onclick": "history.back()"}}>
-  {`Go to home`}
-</Button>
+  {isTrue(routeNotFound) ? (
+  <Fragment>
+  <Error statusCode={404}/>
+</Fragment>
+) : (
+  <Fragment>
+  
+</Fragment>
+)}
 </Fragment>
   <NextHead>
   <title>
-  {`Reflex App`}
+  {`404 - Not Found`}
 </title>
-  <meta content={`A Reflex app.`} name={`description`}/>
+  <meta content={`The page was not found`} name={`description`}/>
   <meta content={`favicon.ico`} property={`og:image`}/>
 </NextHead>
 </Fragment>

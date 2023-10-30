@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { Event, getAllLocalStorageItems, getRefValue, getRefValues, isTrue, preventDefault, refs, spreadArraysOrObjects, uploadFiles, useEventLoop } from "/utils/state"
 import { EventLoopContext, initialEvents, StateContext } from "/utils/context.js"
 import "focus-visible/dist/focus-visible"
-import { Box, Button, Code, Heading, Link, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, useColorMode, VStack } from "@chakra-ui/react"
+import { Box, Button, CircularProgress, CircularProgressLabel, Code, Heading, Link, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, useColorMode, VStack } from "@chakra-ui/react"
 import { MoonIcon, SunIcon } from "@chakra-ui/icons"
 import NextLink from "next/link"
 import NextHead from "next/head"
@@ -90,6 +90,11 @@ export default function Component() {
   <Box>
   {`My name is Iván, I'm a software engineer and I'm from Spain`}
 </Box>
+  <CircularProgress isIndeterminate={true}>
+  <CircularProgressLabel sx={{"color": "green"}}>
+  {``}
+</CircularProgressLabel>
+</CircularProgress>
   <Link as={NextLink} href={`https://reflex.dev/docs/getting-started/introduction`} sx={{"border": "0.1em solid", "padding": "0.5em", "borderRadius": "0.5em", "_hover": {"color": isTrue((colorMode === "light")) ? `rgb(107,99,246)` : `rgb(179, 175, 255)`}}}>
   {`Check out our docs!`}
 </Link>
